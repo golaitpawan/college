@@ -56,11 +56,11 @@ export class UsersService {
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
     if (!user) throw new NotFoundException('User not found');
 
-    return this.prisma.userRole.upsert({
-      where: { userId_roleId_departmentId: { userId, roleId, departmentId: departmentId ?? null } },
-      update: {},
-      create: { userId, roleId, departmentId },
+    const existing = await this.prisma.userRole.findFirst({
+      where: { userId, roleId, departmentId: departmentId ?? null },
     });
+    if (existing) return existing;
+    return this.prisma.userRole.create({ data: { userId, roleId, departmentId } });
   }
 
   async updateStatus(id: string, status: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED') {
