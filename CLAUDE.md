@@ -11,6 +11,67 @@ This is an **enterprise-level college timetable creator and campus community app
 
 See `docs/` for the full architecture, database schema, API design, and roadmap.
 
+## Project Structure
+
+```
+college/
+├── backend/          NestJS API (port 3001)
+│   ├── prisma/       Prisma schema + seed
+│   └── src/
+│       ├── auth/         JWT auth + refresh tokens
+│       ├── users/        User CRUD + role assignment
+│       ├── academic/     Departments, courses, subjects, classrooms, sections, sessions
+│       ├── timetable/    Timetable versions, entries, conflict detection, workflow
+│       ├── notifications/ In-app notifications + Socket.IO gateway
+│       ├── prisma/       PrismaService (global)
+│       └── common/       Guards, decorators, interceptors, filters
+├── frontend/         Next.js 14 App Router (port 3000)
+│   └── src/
+│       ├── app/
+│       │   ├── (auth)/         Login page
+│       │   └── (dashboard)/    All authenticated pages
+│       ├── components/   UI components (layout, timetable grid)
+│       ├── hooks/        useAuth, useTimetable (React Query)
+│       ├── lib/          api.ts (Axios), auth.ts (role helpers)
+│       └── types/        Shared TypeScript types
+├── docs/             Architecture, DB schema, API, roadmap, UI screens
+├── docker-compose.yml PostgreSQL + Redis
+└── setup.sh          One-command dev setup
+```
+
+## Development Commands
+
+```bash
+# One-time setup (requires Docker)
+bash setup.sh
+
+# Backend (NestJS)  — cd backend/
+npm run start:dev     # watch mode dev server on :3001
+npm run build         # compile to dist/
+npm test              # Jest unit tests
+npm run db:migrate    # run new Prisma migrations
+npm run db:seed       # seed demo accounts and data
+npm run db:studio     # open Prisma Studio at :5555
+
+# Frontend (Next.js) — cd frontend/
+npm run dev           # dev server on :3000
+npm run build         # production build
+npm run lint          # ESLint
+
+# Infrastructure
+docker compose up -d   # start PostgreSQL (5432) + Redis (6379)
+docker compose down    # stop
+```
+
+## Demo Accounts (after seeding)
+
+| Email | Password | Role |
+|-------|----------|------|
+| admin@demo.edu | Admin@123 | Super Admin |
+| head.cse@demo.edu | Head@123 | Dept Head (CSE) |
+| prof.smith@demo.edu | Teacher@123 | Teacher |
+| alice@demo.edu | Student@123 | Student |
+
 ## Intended Tech Stack
 
 ### MVP
