@@ -56,7 +56,7 @@ export default function DashboardPage() {
             ) : (
               <div className="space-y-2">
                 {(timetables as any[]).map((t: any) => (
-                  <Link key={t.id} href={`/dashboard/timetable/${t.id}`}
+                  <Link key={t.id} href={`/timetable/${t.id}`}
                     className="card flex items-center justify-between hover:border-primary-300 transition-colors">
                     <div>
                       <p className="font-medium text-sm">{t.section?.name} — {t.department?.name}</p>

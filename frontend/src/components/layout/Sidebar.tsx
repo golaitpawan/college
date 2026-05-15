@@ -8,9 +8,9 @@ import { canManageTimetable, isAdmin } from '@/lib/auth';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', always: true },
-  { href: '/dashboard/timetable', icon: Calendar, label: 'Timetable', always: true },
-  { href: '/dashboard/academic', icon: BookOpen, label: 'Academic Setup', adminOnly: true },
-  { href: '/dashboard/users', icon: Users, label: 'Users', adminOnly: true },
+  { href: '/timetable', icon: Calendar, label: 'Timetable', always: true },
+  { href: '/academic', icon: BookOpen, label: 'Academic Setup', adminOnly: true },
+  { href: '/users', icon: Users, label: 'Users', adminOnly: true },
 ];
 
 export default function Sidebar() {

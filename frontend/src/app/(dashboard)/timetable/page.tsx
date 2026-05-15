@@ -65,7 +65,7 @@ export default function TimetablePage() {
       <div className="p-8 space-y-4">
         {canManage && (
           <div className="flex justify-end">
-            <Link href="/dashboard/timetable/builder" className="btn-primary">
+            <Link href="/timetable/builder" className="btn-primary">
               <Plus className="w-4 h-4" /> New Timetable
             </Link>
           </div>
@@ -78,7 +78,7 @@ export default function TimetablePage() {
         ) : (
           <div className="space-y-2">
             {(timetables as any[]).map((t: any) => (
-              <Link key={t.id} href={`/dashboard/timetable/${t.id}`}
+              <Link key={t.id} href={`/timetable/${t.id}`}
                 className="card flex items-center justify-between hover:border-primary-300 transition-colors cursor-pointer">
                 <div>
                   <p className="font-medium">{t.section?.name} — {t.department?.name}</p>

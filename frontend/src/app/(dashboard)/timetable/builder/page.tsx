@@ -32,7 +32,7 @@ export default function TimetableBuilderPage() {
 
   const create = useMutation({
     mutationFn: (data: any) => timetableApi.create(data),
-    onSuccess: (res) => router.push(`/dashboard/timetable/${res.data.data.id}`),
+    onSuccess: (res) => router.push(`/timetable/${res.data.data.id}`),
   });
 
   return (
